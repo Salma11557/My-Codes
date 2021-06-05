@@ -1,0 +1,36 @@
+class Contact:
+  def __init__(self,name,email):
+    self.name=name
+    if self._validate_email(email):
+      self.email=email
+    else:
+      self.email='No email'
+   
+  def who_I_am(self):
+    return self.name+' '+self.email      
+          
+  @staticmethod
+  def _validate_email(email):
+    email_domain=email.split('@')
+    if len(email_domain)!=2:
+      return False
+    name,domain=email_domain  #name=email_domain[0],other is[1]
+    if len(name)<1 or len(domain)<4: #Min len of domain
+      return False
+    return True  
+
+
+class Friend(Contact):
+  def __init__(self, name, email, phone=''):
+        super().__init__(name, email)
+        self.phone = phone    
+
+class Supplier(Contact):
+  def order(self,ordernumber):
+    print('The purchase orders number is',ordernumber)
+      
+emp=Friend('Salma','Salma@google.com',123456)
+k=Supplier('sal','salm@gmail.com')
+print(emp.phone)
+print(emp.who_I_am())
+k.order(ordernumber=15)
